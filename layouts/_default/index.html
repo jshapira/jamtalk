@@ -1,82 +1,13 @@
 {{ define "body" }}
-  <div class="reveal">
-    <div class="slides">
-      {{ range .Param "sections" }}
-        <section>
-          {{ $background := .background | default "bg_stars.gif" }}
-          {{ $class := .class | default "" }}
-          {{ range .slides }}
-            {{ if .rangeTo }}
-              {{ range seq .rangeFrom .rangeTo }}
-              <section
-                data-background-image='/img/demo/{{ printf "%02d" . }}.png'
-                data-background-size='contain'
-                data-background-position='center'
-                >
-              </section>
-              {{ end }}
-            {{ else }}
-              <section
-                class="{{ $class }}"
-                {{ if .background }}
-                  data-background-image="/img/{{ .background }}"
-                  data-background-position='{{ .position | default "top" }}'
-                  data-background-size='{{ .size | default "cover" }}'
-                  {{ with .repeat }}
-                    data-background-repeat="repeat"
-                  {{ end }}
-                {{ else }}
-                  data-background-image="/img/{{ $background }}"
-                  data-background-size="auto"
-                  data-background-repeat="repeat"
-                {{ end }}
-              >
-                <h1>
-                  {{ .content | markdownify }}
-                </h1>
-              </section>
-            {{ end }}
-          {{ end }}
-        </section>
-      {{ end }}
-    </div>
-  </div>
-  <script src="/reveal.js"></script>
+<h1>
+  SuPeR cOoL wEbSiTe
+</h1>
+<div>
+  hello
+  <img src="http://placecorgi.com/260/180" />
+  <img src="http://placecorgi.com/260/180" />
+  <img src="http://placecorgi.com/260/180" />
+</div>
   <script>
-    Reveal.initialize({
-      {{ if .Site.IsServer }}
-      history: true,
-      {{ end }}
-      center: true
-    });
-
-    function each(qs, cb) {
-      if (typeof qs === "string") {
-        qs = document.querySelectorAll(qs);
-      }
-      if (!qs) {
-        return;
-      }
-      if (qs.length === undefined) {
-        qs = [qs];
-      }
-      for (var i = 0; i < qs.length; i++) {
-        cb(qs[i], i);
-      }
-    }
-
-    function on(ev, qs, cb) {
-      each(qs, function(el) {
-        el.addEventListener(ev, cb);
-      });
-    }
-
-    on("DOMContentLoaded", document, function() {
-      // Open external links in new window
-      each("a[href^=http]", function(el) {
-        el.target = "_blank";
-        el.rel = "noopener noreferrer";
-      });
-    });
   </script>
 {{ end }}
